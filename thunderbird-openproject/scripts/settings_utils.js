@@ -18,6 +18,12 @@ function loadDefaultAssignee() {
         .then((res) => res.defaultassignee);
 }
 
+function loadDefaultResponsible() {
+    return browser.storage.local
+        .get("defaultresponsible")
+        .then((res) => res.defaultresponsible);
+}
+
 function loadDefaultContentFormat() {
     return browser.storage.local
         .get("defaultcontentformat")
@@ -33,9 +39,9 @@ function loadIncludeMessageBody() {
 function showSettingsIfNecessary() {
     loadAPIUrl().then((apiurl) => {
         loadAPIToken().then((token) => {
-            if (!token || token.length < 40 || !apiurl || apiurl < 10) {
+            if (!token || token.length < 40 || !apiurl || apiurl.length < 10) {
                 browser.runtime.openOptionsPage();
             }
-        })
+        });
     });
 }

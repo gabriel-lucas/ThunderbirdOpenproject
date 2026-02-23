@@ -1,34 +1,256 @@
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  width: 400px;
-  margin: 8px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    width: 420px;
+    margin: 0;
+    padding: 12px;
+    background-color: #f5f5f5;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 #popup-page {
-  width: 100%;
+    width: 100%;
 }
 
+/* Header styling */
+.popup-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.popup-header img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.popup-header h1 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+/* Input styling */
 .popup-input input,
 .popup-input select,
-.popup-input button {
-  width: 100%;
-  margin-bottom: 10px;
+.popup-input textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+.popup-input input:focus,
+.popup-input select:focus,
+.popup-input textarea:focus {
+    outline: none;
+    border-color: #1a67a3;
+    box-shadow: 0 0 0 2px rgba(26, 103, 163, 0.2);
+}
+
+.popup-input select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23555' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+/* Textarea styling */
+.popup-input textarea {
+    resize: vertical;
+    min-height: 60px;
+    font-family: inherit;
+    line-height: 1.4;
+}
+
+.popup-input textarea.task-content {
+    min-height: 48px;
+    max-height: 100px;
+}
+
+.popup-input textarea.description-content {
+    min-height: 100px;
+    max-height: 200px;
+}
+
+/* Date row styling */
+.date-row {
+    display: flex;
+    gap: 12px;
+}
+
+.date-row .form-group {
+    flex: 1;
+}
+
+.date-row input[type="date"] {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 13px;
+}
+
+/* Checkbox styling */
 .popup-checkbox {
-  width: 100%;
-  margin-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+.popup-checkbox label {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #555;
+    cursor: pointer;
+}
+
+.popup-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Button styling */
+.popup-button {
+    margin-top: 16px;
+}
+
+.popup-button button {
+    width: 100%;
+    padding: 10px 16px;
+    background-color: #1a67a3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.popup-button button:hover {
+    background-color: #145588;
+}
+
+.popup-button button:active {
+    background-color: #104470;
+}
+
+.popup-button button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Error message styling */
+.error-message {
+    color: #d32f2f;
+    font-size: 12px;
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    display: none;
+}
+
+.error-message.visible {
+    display: block;
+}
+
+/* Success message styling */
+.success-message {
+    color: #388e3c;
+    font-size: 12px;
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #e8f5e9;
+    border-radius: 4px;
+    display: none;
+}
+
+.success-message.visible {
+    display: block;
+}
+
+/* Loading indicator */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* Settings page specific */
+#settings {
+    width: 100%;
 }
 
 .popup-label {
-  margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 4px;
+    margin-top: 12px;
+}
+
+.popup-label:first-child {
+    margin-top: 0;
 }
 
 .popup-indented {
-  width: 95%;
-  margin-left: 5%;
+    width: 95%;
+    margin-left: 5%;
+    margin-top: 8px;
+}
+
+/* Link styling */
+a {
+    color: #1a67a3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Select dropdown for size > 1 (legacy support) */
+.popup-input select[size] {
+    height: auto;
+    min-height: 100px;
+    background-image: none;
+    padding-right: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+    body {
+        width: 100%;
+        padding: 8px;
+    }
+    
+    .date-row {
+        flex-direction: column;
+        gap: 8px;
+    }
 }

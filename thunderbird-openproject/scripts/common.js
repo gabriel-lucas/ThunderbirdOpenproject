@@ -1,20 +1,29 @@
-function getSelectedProject(selectid) {
-    const projects = document.getElementById(selectid);
-    if (projects.options[projects.selectedIndex]) {
-        return projects.options[projects.selectedIndex].value;
+function getSelectValue(selectid) {
+    const select = document.getElementById(selectid);
+    if (select && select.options[select.selectedIndex]) {
+        return select.options[select.selectedIndex].value;
     }
     return "";
+}
+
+// Legacy aliases for backwards compatibility
+function getSelectedProject(selectid) {
+    return getSelectValue(selectid);
 }
 
 function getSelectedAssignee(selectid) {
-    const assignees = document.getElementById(selectid);
-    if (assignees.options[assignees.selectedIndex]) {
-        return assignees.options[assignees.selectedIndex].value;
-    }
-    return "";
+    return getSelectValue(selectid);
 }
 
-function fillAllProjectsSelect(selectid, selected) {
+function fillAllProjectsSelect(selectid, selectedValue) {
+    const el = document.getElementById(selectid);
+    
+    // Add placeholder option
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = t('selectProject');
+    el.appendChild(placeholderOption);
+    
     loadDefaultProject().then((selected) => {
         getAllProjects()
             .then((projects) => {
@@ -22,59 +31,86 @@ function fillAllProjectsSelect(selectid, selected) {
                     let option = document.createElement("option");
                     let text = "";
                     for (let i = 0; i < indent; i++) {
-                        text += "&nbsp;&nbsp;&nbsp;";
+                        text += "   ";
                     }
-                    option.innerHTML = text + proj.name;
+                    option.textContent = text + proj.name;
                     option.value = proj.id;
-                    if (proj.id == selected) {
+                    if (proj.id == selected || proj.id == selectedValue) {
                         option.selected = true;
                     }
-                    el.add(option);
+                    el.appendChild(option);
                     proj.childs.forEach((child) => {
                         process(child, indent + 1);
                     });
                 }
-                const el = document.getElementById(selectid);
-                el.innerHTML = "";
                 projects.forEach((proj) => {
                     process(proj, 0);
                 });
             })
             .catch((err) => {
-                const el = document.getElementById(selectid);
-                el.innerHTML =
-                    '<option value="0">Could not connect to OpenProject...</option>';
+                console.error("Failed to load projects:", err);
+                el.innerHTML = '<option value="">' + t('couldNotConnect') + '</option>';
             });
     });
 }
 
-function fillAllAssigneesSelect(selectid, selected) {
+function fillAllAssigneesSelect(selectid, selectedValue) {
+    const el = document.getElementById(selectid);
+    
+    // Add placeholder option
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = t('selectAssignee');
+    el.appendChild(placeholderOption);
+    
     loadDefaultAssignee().then((selected) => {
         getAllUsers()
             .then((users) => {
-                function process(usr, indent) {
+                users.forEach((usr) => {
                     let option = document.createElement("option");
-                    let text = "";
-                    for (let i = 0; i < indent; i++) {
-                        text += "&nbsp;&nbsp;&nbsp;";
-                    }
-                    option.innerHTML = text + usr.name;
+                    option.textContent = usr.name;
                     option.value = usr.id;
-                    if (usr.id == selected) {
+                    if (usr.id == selected || usr.id == selectedValue) {
                         option.selected = true;
                     }
-                    el.add(option);
-                }
-                const el = document.getElementById(selectid);
-                el.innerHTML = "";
-                users.forEach((usr) => {
-                    process(usr, 0);
+                    el.appendChild(option);
                 });
             })
             .catch((err) => {
-                const el = document.getElementById(selectid);
-                el.innerHTML =
-                    '<option value="0">Could not connect to OpenProject...</option>';
+                console.error("Failed to load users:", err);
+                el.innerHTML = '<option value="">' + t('couldNotConnect') + '</option>';
+            });
+    });
+}
+
+function fillAllResponsiblesSelect(selectid, selectedValue) {
+    const el = document.getElementById(selectid);
+    
+    // Add placeholder option
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = t('selectResponsible');
+    el.appendChild(placeholderOption);
+    
+    // Load default responsible and populate select
+    loadDefaultResponsible().then((defaultResponsible) => {
+        const valueToSelect = selectedValue || defaultResponsible;
+        
+        getAllUsers()
+            .then((users) => {
+                users.forEach((usr) => {
+                    let option = document.createElement("option");
+                    option.textContent = usr.name;
+                    option.value = usr.id;
+                    if (usr.id == valueToSelect) {
+                        option.selected = true;
+                    }
+                    el.appendChild(option);
+                });
+            })
+            .catch((err) => {
+                console.error("Failed to load users:", err);
+                el.innerHTML = '<option value="">' + t('couldNotConnect') + '</option>';
             });
     });
 }
@@ -97,7 +133,7 @@ function findMessageBody(messageId) {
         if (part.contentType.toLowerCase() === contentType) {
             return part.body;
         }
-        for (currentPart of part.parts || []) {
+        for (const currentPart of part.parts || []) {
             const result = traversePart(currentPart, contentType);
             if (result !== undefined) {
                 return result;
@@ -142,13 +178,71 @@ function formatDefaultTaskContent(message) {
     );
 }
 
-function addTaskFromMessage(contentid, projectselector, assigneeselector, includebodyid, failid) {
-    const content = document.getElementById(contentid).value;
-    const project = getSelectedProject(projectselector);
-    const assignee = getSelectedAssignee(assigneeselector);
-    const includeMessageBody = includebodyid
-        ? document.getElementById(includebodyid).checked
+function showError(elementId, message) {
+    const el = document.getElementById(elementId);
+    el.textContent = message;
+    el.classList.add('visible');
+}
+
+function hideError(elementId) {
+    const el = document.getElementById(elementId);
+    el.textContent = '';
+    el.classList.remove('visible');
+}
+
+function showSuccessNotification(message) {
+    // Create a notification using the Thunderbird notifications API
+    browser.notifications.create({
+        type: 'basic',
+        iconUrl: 'images/icon.png',
+        title: 'OpenProject',
+        message: message
+    });
+}
+
+function addTaskFromMessage(options) {
+    const {
+        contentId,
+        projectSelector,
+        assigneeSelector,
+        responsibleSelector,
+        descriptionId,
+        startDateId,
+        endDateId,
+        includeBodyId,
+        errorId
+    } = options;
+    
+    // Get form values
+    const content = document.getElementById(contentId).value.trim();
+    const project = getSelectValue(projectSelector);
+    const assignee = getSelectValue(assigneeSelector);
+    const responsible = getSelectValue(responsibleSelector);
+    const description = document.getElementById(descriptionId)?.value.trim() || "";
+    const startDate = document.getElementById(startDateId)?.value || "";
+    const endDate = document.getElementById(endDateId)?.value || "";
+    const includeMessageBody = includeBodyId
+        ? document.getElementById(includeBodyId).checked
         : false;
+    
+    // Hide previous error
+    hideError(errorId);
+    
+    // Validate required fields
+    if (!content) {
+        showError(errorId, t('errorNoTask'));
+        return;
+    }
+    if (!project) {
+        showError(errorId, t('errorNoProject'));
+        return;
+    }
+    
+    // Disable button to prevent double submission
+    const addButton = document.getElementById('task_add');
+    addButton.disabled = true;
+    addButton.textContent = t('connecting');
+    
     Promise.resolve()
         .then(() => {
             if (includeMessageBody) {
@@ -159,11 +253,27 @@ function addTaskFromMessage(contentid, projectselector, assigneeselector, includ
                 return "";
             }
         })
-        .then((messageContent) => addTask(content, project, assignee, messageContent))
+        .then((messageContent) => {
+            // Combine description with message body if both exist
+            const fullDescription = description 
+                ? (messageContent ? description + "\n\n" + messageContent : description)
+                : messageContent;
+            
+            return addTask(content, project, assignee, responsible, fullDescription, startDate, endDate);
+        })
         .then((res) => {
+            // Show success notification
+            showSuccessNotification(t('taskCreated'));
+            // Close the popup
             window.close();
         })
         .catch((err) => {
-            document.getElementById(failid).innerHTML = "Adding Task failed...";
+            console.error("Task creation failed:", err);
+            const errorMsg = err?.message || t('taskCreationFailed');
+            showError(errorId, errorMsg);
+            
+            // Re-enable button
+            addButton.disabled = false;
+            addButton.textContent = t('addTask');
         });
 }

@@ -1,3 +1,24 @@
+// Detect Thunderbird layout mode and adjust panel accordingly
+async function detectLayoutMode() {
+    try {
+        // Get the current window
+        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+        if (tabs && tabs.length > 0) {
+            // Check if we're in vertical view by examining the window dimensions
+            // In vertical layout, the message pane is typically narrower
+            const window = await browser.windows.getCurrent();
+            
+            // If window height is significantly greater than width, likely vertical mode
+            // This is a heuristic - Thunderbird doesn't expose layout mode directly
+            if (window.height > window.width * 1.5) {
+                document.body.classList.add('vertical-layout');
+            }
+        }
+    } catch (e) {
+        console.log('Could not detect layout mode:', e);
+    }
+}
+
 function messageAddTask() {
     addTaskFromMessage({
         contentId: 'task_content',
@@ -65,6 +86,9 @@ function prefillContent() {
     initI18n().then(() => {
         // Apply translations
         applyTranslations();
+        
+        // Detect layout mode and adjust panel
+        detectLayoutMode();
         
         // Fill dropdowns
         fillAllProjectsSelect('task_project');

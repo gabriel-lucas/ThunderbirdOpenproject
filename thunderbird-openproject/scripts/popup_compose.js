@@ -1,3 +1,16 @@
+// Detect Thunderbird layout mode and adjust panel accordingly
+async function detectLayoutMode() {
+    try {
+        const window = await browser.windows.getCurrent();
+        // If window height is significantly greater than width, likely vertical mode
+        if (window.height > window.width * 1.5) {
+            document.body.classList.add('vertical-layout');
+        }
+    } catch (e) {
+        console.log('Could not detect layout mode:', e);
+    }
+}
+
 function composeAddTask() {
     addTaskFromMessage({
         contentId: 'task_content',
@@ -38,6 +51,9 @@ function prefillComposeContent() {
     initI18n().then(() => {
         // Apply translations
         applyTranslations();
+        
+        // Detect layout mode and adjust panel
+        detectLayoutMode();
         
         // Fill dropdowns
         fillAllProjectsSelect('task_project');

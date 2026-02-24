@@ -12,17 +12,13 @@
   </head>
   <body>
     <div id="popup-page">
-      <!-- Row 1: Task and Project -->
-      <div class="form-row">
+      <!-- Two-column grid layout -->
+      <div class="form-grid">
+        <!-- Row 1: Task and Project -->
         <div class="form-group">
           <label for="task_content" data-i18n="task">Task</label>
           <div class="popup-input">
-            <textarea 
-              id="task_content" 
-              class="task-content" 
-              rows="2" 
-              data-i18n-placeholder="task"
-            ></textarea>
+            <textarea id="task_content" class="task-content" rows="1"></textarea>
           </div>
         </div>
         <div class="form-group">
@@ -33,10 +29,8 @@
             </select>
           </div>
         </div>
-      </div>
-      
-      <!-- Row 2: Assigned To and Responsible -->
-      <div class="form-row">
+        
+        <!-- Row 2: Assigned To and Responsible -->
         <div class="form-group">
           <label for="task_assignee" data-i18n="assignedTo">Assigned to</label>
           <div class="popup-input">
@@ -53,22 +47,16 @@
             </select>
           </div>
         </div>
-      </div>
-      
-      <!-- Row 3: Description -->
-      <div class="form-group">
-        <label for="task_description" data-i18n="description">Description</label>
-        <div class="popup-input">
-          <textarea 
-            id="task_description" 
-            class="description-content" 
-            rows="3"
-          ></textarea>
+        
+        <!-- Row 3: Description (full width) -->
+        <div class="form-group full-width">
+          <label for="task_description" data-i18n="description">Description</label>
+          <div class="popup-input">
+            <textarea id="task_description" class="description-content" rows="3"></textarea>
+          </div>
         </div>
-      </div>
-      
-      <!-- Row 4: Start Date and End Date -->
-      <div class="form-row">
+        
+        <!-- Row 4: Start Date and End Date -->
         <div class="form-group">
           <label for="task_start_date" data-i18n="startDate">Start Date</label>
           <div class="popup-input">
@@ -81,10 +69,8 @@
             <input type="date" id="task_end_date" />
           </div>
         </div>
-      </div>
-      
-      <!-- Row 5: Priority and Category -->
-      <div class="form-row">
+        
+        <!-- Row 5: Priority and Category -->
         <div class="form-group">
           <label for="task_priority" data-i18n="priority">Priority</label>
           <div class="popup-input">
@@ -101,10 +87,8 @@
             </select>
           </div>
         </div>
-      </div>
-      
-      <!-- Row 6: Work and Remaining Work -->
-      <div class="form-row">
+        
+        <!-- Row 6: Work and Remaining Work -->
         <div class="form-group">
           <label for="task_work" data-i18n="work">Work</label>
           <div class="popup-input">

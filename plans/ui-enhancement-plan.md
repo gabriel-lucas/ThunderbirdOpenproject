@@ -350,3 +350,43 @@ Created `docs/images/` directory for screenshots. You'll need to add:
 - `task-panel.png` - Task creation panel screenshot
 - `compose-panel.png` - Compose window panel screenshot
 - `settings.png` - Settings page screenshot
+
+
+
+## Two-Column Layout Implementation Complete
+
+### Layout Changes
+
+**CSS Grid Implementation** ([`popup.css`](thunderbird-openproject/popup.css)):
+- Uses CSS Grid with `grid-template-columns: 1fr 1fr` for true two-column layout
+- Fixed width of 560px for horizontal layout (fits all fields without scrolling)
+- Vertical layout mode at 320px width with single column
+- `overflow: hidden` on body prevents scrolling
+
+**Layout Structure**:
+```
+┌──────────────────────────────────────────────────────┐
+│ Task [textarea]          │ Project [dropdown]        │
+│ Assigned to [dropdown]   │ Responsible [dropdown]    │
+│ Description [textarea - full width]                  │
+│ ☐ Copy email                                        │
+│ Start Date [date]        │ End Date [date]           │
+│ Priority [dropdown]      │ Category [dropdown]       │
+│ Work [input] hours       │ Remaining [input] hours   │
+│                    [Add Task]                        │
+└──────────────────────────────────────────────────────┘
+```
+
+**Thunderbird Layout Mode Detection**:
+- Added `detectLayoutMode()` function in both popup scripts
+- Detects vertical layout when window height > width * 1.5
+- Applies `vertical-layout` class to switch to single-column layout
+- Horizontal layout (default): 560px wide, two columns
+- Vertical layout: 320px wide, single column
+
+### Files Modified
+- [`thunderbird-openproject/popup.css`](thunderbird-openproject/popup.css) - CSS Grid layout with responsive design
+- [`thunderbird-openproject/popup_message.html`](thunderbird-openproject/popup_message.html) - Grid-based HTML structure
+- [`thunderbird-openproject/popup_compose.html`](thunderbird-openproject/popup_compose.html) - Grid-based HTML structure
+- [`thunderbird-openproject/scripts/popup_message.js`](thunderbird-openproject/scripts/popup_message.js) - Layout detection
+- [`thunderbird-openproject/scripts/popup_compose.js`](thunderbird-openproject/scripts/popup_compose.js) - Layout detection

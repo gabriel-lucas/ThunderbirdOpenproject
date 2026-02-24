@@ -12,69 +12,63 @@
   </head>
   <body>
     <div id="popup-page">
-      <!-- Header -->
-      <div class="popup-header">
-        <img src="images/openproject-icon.png" alt="OpenProject" />
-        <h1 data-i18n="addTask">Add Task</h1>
-      </div>
-      
-      <!-- Task Subject -->
-      <div class="form-group">
-        <label for="task_content" data-i18n="task">Task</label>
-        <div class="popup-input">
-          <textarea 
-            id="task_content" 
-            class="task-content" 
-            rows="2" 
-            data-i18n-placeholder="task"
-          ></textarea>
+      <!-- Row 1: Task and Project -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="task_content" data-i18n="task">Task</label>
+          <div class="popup-input">
+            <textarea 
+              id="task_content" 
+              class="task-content" 
+              rows="2" 
+              data-i18n-placeholder="task"
+            ></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="task_project" data-i18n="project">Project</label>
+          <div class="popup-input">
+            <select id="task_project">
+              <option value="" disabled selected class="placeholder" data-i18n="selectProject">Select a project...</option>
+            </select>
+          </div>
         </div>
       </div>
       
-      <!-- Project -->
-      <div class="form-group">
-        <label for="task_project" data-i18n="project">Project</label>
-        <div class="popup-input">
-          <select id="task_project">
-            <option value="" data-i18n="selectProject">Select a project...</option>
-          </select>
+      <!-- Row 2: Assigned To and Responsible -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="task_assignee" data-i18n="assignedTo">Assigned to</label>
+          <div class="popup-input">
+            <select id="task_assignee">
+              <option value="" disabled selected class="placeholder" data-i18n="selectAssignee">Select assignee...</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="task_responsible" data-i18n="responsible">Responsible</label>
+          <div class="popup-input">
+            <select id="task_responsible">
+              <option value="" disabled selected class="placeholder" data-i18n="selectResponsible">Select responsible...</option>
+            </select>
+          </div>
         </div>
       </div>
       
-      <!-- Assigned To -->
-      <div class="form-group">
-        <label for="task_assignee" data-i18n="assignedTo">Assigned to</label>
-        <div class="popup-input">
-          <select id="task_assignee">
-            <option value="" data-i18n="selectAssignee">Select assignee...</option>
-          </select>
-        </div>
-      </div>
-      
-      <!-- Responsible -->
-      <div class="form-group">
-        <label for="task_responsible" data-i18n="responsible">Responsible</label>
-        <div class="popup-input">
-          <select id="task_responsible">
-            <option value="" data-i18n="selectResponsible">Select responsible...</option>
-          </select>
-        </div>
-      </div>
-      
-      <!-- Description -->
+      <!-- Row 3: Description -->
       <div class="form-group">
         <label for="task_description" data-i18n="description">Description</label>
         <div class="popup-input">
           <textarea 
             id="task_description" 
             class="description-content" 
-            rows="4"
+            rows="3"
           ></textarea>
         </div>
       </div>
       
-      <!-- Date Row -->
-      <div class="date-row">
+      <!-- Row 4: Start Date and End Date -->
+      <div class="form-row">
         <div class="form-group">
           <label for="task_start_date" data-i18n="startDate">Start Date</label>
           <div class="popup-input">
@@ -85,6 +79,48 @@
           <label for="task_end_date" data-i18n="endDate">End Date</label>
           <div class="popup-input">
             <input type="date" id="task_end_date" />
+          </div>
+        </div>
+      </div>
+      
+      <!-- Row 5: Priority and Category -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="task_priority" data-i18n="priority">Priority</label>
+          <div class="popup-input">
+            <select id="task_priority">
+              <option value="" disabled selected class="placeholder" data-i18n="selectPriority">Select priority...</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="task_category" data-i18n="category">Category</label>
+          <div class="popup-input">
+            <select id="task_category">
+              <option value="" disabled selected class="placeholder" data-i18n="selectCategory">Select category...</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Row 6: Work and Remaining Work -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="task_work" data-i18n="work">Work</label>
+          <div class="popup-input">
+            <div class="input-with-unit">
+              <input type="number" id="task_work" min="0" step="0.5" value="1" />
+              <span class="unit" data-i18n="hours">hours</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="task_remaining_work" data-i18n="remainingWork">Remaining Work</label>
+          <div class="popup-input">
+            <div class="input-with-unit">
+              <input type="number" id="task_remaining_work" min="0" step="0.5" value="1" />
+              <span class="unit" data-i18n="hours">hours</span>
+            </div>
           </div>
         </div>
       </div>

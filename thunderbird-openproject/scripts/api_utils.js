@@ -101,7 +101,41 @@ async function getAvailablePriorities() {
     }
 }
 
-async function addTask(content, projectid, assigneeid, responsibleid, description, startDate, endDate) {
+async function getProjectCategories(projectId) {
+    try {
+        const result = await requestGet(`/api/v3/projects/${projectId}/categories`);
+        return result._embedded?.elements || [];
+    } catch (e) {
+        console.error("Failed to fetch categories:", e);
+        return [];
+    }
+}
+
+/**
+ * Convert hours to ISO 8601 duration format
+ * @param {number} hours - Number of hours
+ * @returns {string} ISO 8601 duration string (e.g., "PT1H" for 1 hour)
+ */
+function hoursToDuration(hours) {
+    if (!hours || hours <= 0) return null;
+    
+    // Handle fractional hours
+    const totalMinutes = Math.round(hours * 60);
+    const h = Math.floor(totalMinutes / 60);
+    const m = totalMinutes % 60;
+    
+    let duration = "PT";
+    if (h > 0) {
+        duration += `${h}H`;
+    }
+    if (m > 0) {
+        duration += `${m}M`;
+    }
+    
+    return duration === "PT" ? "PT0H" : duration;
+}
+
+async function addTask(content, projectid, assigneeid, responsibleid, description, startDate, endDate, priorityId, categoryId, workHours, remainingWorkHours) {
     // Fetch available types and priorities dynamically
     const [types, priorities] = await Promise.all([
         getAvailableTypes(projectid),
@@ -110,7 +144,7 @@ async function addTask(content, projectid, assigneeid, responsibleid, descriptio
     
     // Use first available type, or fallback to a default
     const typeId = types.length > 0 ? types[0].id : null;
-    const priorityId = priorities.length > 0 ? priorities[0].id : null;
+    const defaultPriorityId = priorityId || (priorities.length > 0 ? priorities[0].id : null);
     
     // Build the work package payload
     const payload = {
@@ -147,10 +181,17 @@ async function addTask(content, projectid, assigneeid, responsibleid, descriptio
         };
     }
     
-    // Add priority if available
-    if (priorityId) {
+    // Add priority if provided or default available
+    if (defaultPriorityId) {
         payload._links.priority = {
-            "href": "/api/v3/priorities/" + priorityId
+            "href": "/api/v3/priorities/" + defaultPriorityId
+        };
+    }
+    
+    // Add category if provided
+    if (categoryId) {
+        payload._links.category = {
+            "href": `/api/v3/categories/${categoryId}`
         };
     }
     
@@ -166,6 +207,18 @@ async function addTask(content, projectid, assigneeid, responsibleid, descriptio
         payload._links.responsible = {
             "href": "/api/v3/users/" + parseInt(responsibleid, 10)
         };
+    }
+    
+    // Add estimated time (work) if provided
+    const estimatedTime = hoursToDuration(workHours);
+    if (estimatedTime) {
+        payload.estimatedTime = estimatedTime;
+    }
+    
+    // Add remaining time if provided
+    const remainingTime = hoursToDuration(remainingWorkHours);
+    if (remainingTime) {
+        payload.remainingTime = remainingTime;
     }
     
     return requestPost("/api/v3/work_packages", payload);

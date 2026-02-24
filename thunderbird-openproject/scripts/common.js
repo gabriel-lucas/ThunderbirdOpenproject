@@ -18,10 +18,16 @@ function getSelectedAssignee(selectid) {
 function fillAllProjectsSelect(selectid, selectedValue) {
     const el = document.getElementById(selectid);
     
+    // Clear existing options
+    el.innerHTML = '';
+    
     // Add placeholder option
     const placeholderOption = document.createElement("option");
     placeholderOption.value = "";
     placeholderOption.textContent = t('selectProject');
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    placeholderOption.classList.add("placeholder");
     el.appendChild(placeholderOption);
     
     loadDefaultProject().then((selected) => {
@@ -37,6 +43,8 @@ function fillAllProjectsSelect(selectid, selectedValue) {
                     option.value = proj.id;
                     if (proj.id == selected || proj.id == selectedValue) {
                         option.selected = true;
+                        // Deselect placeholder when we have a selection
+                        placeholderOption.selected = false;
                     }
                     el.appendChild(option);
                     proj.childs.forEach((child) => {
@@ -57,10 +65,16 @@ function fillAllProjectsSelect(selectid, selectedValue) {
 function fillAllAssigneesSelect(selectid, selectedValue) {
     const el = document.getElementById(selectid);
     
+    // Clear existing options
+    el.innerHTML = '';
+    
     // Add placeholder option
     const placeholderOption = document.createElement("option");
     placeholderOption.value = "";
     placeholderOption.textContent = t('selectAssignee');
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    placeholderOption.classList.add("placeholder");
     el.appendChild(placeholderOption);
     
     loadDefaultAssignee().then((selected) => {
@@ -72,6 +86,7 @@ function fillAllAssigneesSelect(selectid, selectedValue) {
                     option.value = usr.id;
                     if (usr.id == selected || usr.id == selectedValue) {
                         option.selected = true;
+                        placeholderOption.selected = false;
                     }
                     el.appendChild(option);
                 });
@@ -86,10 +101,16 @@ function fillAllAssigneesSelect(selectid, selectedValue) {
 function fillAllResponsiblesSelect(selectid, selectedValue) {
     const el = document.getElementById(selectid);
     
+    // Clear existing options
+    el.innerHTML = '';
+    
     // Add placeholder option
     const placeholderOption = document.createElement("option");
     placeholderOption.value = "";
     placeholderOption.textContent = t('selectResponsible');
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    placeholderOption.classList.add("placeholder");
     el.appendChild(placeholderOption);
     
     // Load default responsible and populate select
@@ -104,6 +125,7 @@ function fillAllResponsiblesSelect(selectid, selectedValue) {
                     option.value = usr.id;
                     if (usr.id == valueToSelect) {
                         option.selected = true;
+                        placeholderOption.selected = false;
                     }
                     el.appendChild(option);
                 });
@@ -113,6 +135,78 @@ function fillAllResponsiblesSelect(selectid, selectedValue) {
                 el.innerHTML = '<option value="">' + t('couldNotConnect') + '</option>';
             });
     });
+}
+
+function fillAllPrioritiesSelect(selectid, selectedValue) {
+    const el = document.getElementById(selectid);
+    
+    // Clear existing options
+    el.innerHTML = '';
+    
+    // Add placeholder option
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = t('selectPriority');
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    placeholderOption.classList.add("placeholder");
+    el.appendChild(placeholderOption);
+    
+    getAvailablePriorities()
+        .then((priorities) => {
+            priorities.forEach((priority) => {
+                let option = document.createElement("option");
+                option.textContent = priority.name;
+                option.value = priority.id;
+                if (priority.id == selectedValue) {
+                    option.selected = true;
+                    placeholderOption.selected = false;
+                }
+                el.appendChild(option);
+            });
+        })
+        .catch((err) => {
+            console.error("Failed to load priorities:", err);
+            el.innerHTML = '<option value="">' + t('couldNotConnect') + '</option>';
+        });
+}
+
+function fillCategoriesSelect(selectid, projectId, selectedValue) {
+    const el = document.getElementById(selectid);
+    
+    // Clear existing options
+    el.innerHTML = '';
+    
+    // Add placeholder option
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = t('selectCategory');
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    placeholderOption.classList.add("placeholder");
+    el.appendChild(placeholderOption);
+    
+    if (!projectId) {
+        return;
+    }
+    
+    getProjectCategories(projectId)
+        .then((categories) => {
+            categories.forEach((category) => {
+                let option = document.createElement("option");
+                option.textContent = category.name;
+                option.value = category.id;
+                if (category.id == selectedValue) {
+                    option.selected = true;
+                    placeholderOption.selected = false;
+                }
+                el.appendChild(option);
+            });
+        })
+        .catch((err) => {
+            console.error("Failed to load categories:", err);
+            el.innerHTML = '<option value="">' + t('couldNotConnect') + '</option>';
+        });
 }
 
 function getDisplayedMessage() {
@@ -209,7 +303,10 @@ function addTaskFromMessage(options) {
         descriptionId,
         startDateId,
         endDateId,
-        includeBodyId,
+        prioritySelector,
+        categorySelector,
+        workId,
+        remainingWorkId,
         errorId
     } = options;
     
@@ -221,9 +318,10 @@ function addTaskFromMessage(options) {
     const description = document.getElementById(descriptionId)?.value.trim() || "";
     const startDate = document.getElementById(startDateId)?.value || "";
     const endDate = document.getElementById(endDateId)?.value || "";
-    const includeMessageBody = includeBodyId
-        ? document.getElementById(includeBodyId).checked
-        : false;
+    const priority = getSelectValue(prioritySelector);
+    const category = getSelectValue(categorySelector);
+    const work = parseFloat(document.getElementById(workId)?.value) || 1;
+    const remainingWork = parseFloat(document.getElementById(remainingWorkId)?.value) || work;
     
     // Hide previous error
     hideError(errorId);
@@ -243,24 +341,7 @@ function addTaskFromMessage(options) {
     addButton.disabled = true;
     addButton.textContent = t('connecting');
     
-    Promise.resolve()
-        .then(() => {
-            if (includeMessageBody) {
-                return getDisplayedMessage().then(([message]) =>
-                    findMessageBody(message.id)
-                );
-            } else {
-                return "";
-            }
-        })
-        .then((messageContent) => {
-            // Combine description with message body if both exist
-            const fullDescription = description 
-                ? (messageContent ? description + "\n\n" + messageContent : description)
-                : messageContent;
-            
-            return addTask(content, project, assignee, responsible, fullDescription, startDate, endDate);
-        })
+    addTask(content, project, assignee, responsible, description, startDate, endDate, priority, category, work, remainingWork)
         .then((res) => {
             // Show success notification
             showSuccessNotification(t('taskCreated'));

@@ -28,9 +28,18 @@ const translations = {
         selectProject: "Select a project...",
         selectAssignee: "Select assignee...",
         selectResponsible: "Select responsible...",
+        selectPriority: "Select priority...",
+        selectCategory: "Select category...",
         errorNoProject: "Please select a project",
         errorNoTask: "Task subject is required",
-        includeMessageBody: "Include message body as description",
+        copyEmail: "Copy email",
+        
+        // New fields
+        priority: "Priority",
+        category: "Category",
+        work: "Work",
+        remainingWork: "Remaining Work",
+        hours: "hours",
         
         // Settings
         settings: "Settings",
@@ -73,9 +82,18 @@ const translations = {
         selectProject: "选择项目...",
         selectAssignee: "选择分配人...",
         selectResponsible: "选择负责人...",
+        selectPriority: "选择优先级...",
+        selectCategory: "选择类别...",
         errorNoProject: "请选择一个项目",
         errorNoTask: "任务主题是必需的",
-        includeMessageBody: "将邮件正文包含为描述",
+        copyEmail: "复制邮件",
+        
+        // New fields
+        priority: "优先级",
+        category: "类别",
+        work: "工作量",
+        remainingWork: "剩余工作量",
+        hours: "小时",
         
         // Settings
         settings: "设置",
@@ -118,9 +136,18 @@ const translations = {
         selectProject: "Seleccionar proyecto...",
         selectAssignee: "Seleccionar asignado...",
         selectResponsible: "Seleccionar responsable...",
+        selectPriority: "Seleccionar prioridad...",
+        selectCategory: "Seleccionar categoría...",
         errorNoProject: "Por favor, seleccione un proyecto",
         errorNoTask: "El asunto de la tarea es obligatorio",
-        includeMessageBody: "Incluir cuerpo del mensaje como descripción",
+        copyEmail: "Copiar correo",
+        
+        // New fields
+        priority: "Prioridad",
+        category: "Categoría",
+        work: "Trabajo",
+        remainingWork: "Trabajo restante",
+        hours: "horas",
         
         // Settings
         settings: "Configuración",
@@ -163,9 +190,18 @@ const translations = {
         selectProject: "परियोजना चुनें...",
         selectAssignee: "सौंपने वाला चुनें...",
         selectResponsible: "जिम्मेदार चुनें...",
+        selectPriority: "प्राथमिकता चुनें...",
+        selectCategory: "श्रेणी चुनें...",
         errorNoProject: "कृपया एक परियोजना चुनें",
         errorNoTask: "कार्य विषय आवश्यक है",
-        includeMessageBody: "संदेश निकाय को विवरण के रूप में शामिल करें",
+        copyEmail: "ईमेल कॉपी करें",
+        
+        // New fields
+        priority: "प्राथमिकता",
+        category: "श्रेणी",
+        work: "कार्य",
+        remainingWork: "शेष कार्य",
+        hours: "घंटे",
         
         // Settings
         settings: "सेटिंग्स",
@@ -208,9 +244,18 @@ const translations = {
         selectProject: "اختر مشروعًا...",
         selectAssignee: "اختر مُسندًا إليه...",
         selectResponsible: "اختر مسؤولاً...",
+        selectPriority: "اختر أولوية...",
+        selectCategory: "اختر فئة...",
         errorNoProject: "يرجى اختيار مشروع",
         errorNoTask: "موضوع المهمة مطلوب",
-        includeMessageBody: "تضمين نص الرسالة كوصف",
+        copyEmail: "نسخ البريد",
+        
+        // New fields
+        priority: "الأولوية",
+        category: "الفئة",
+        work: "العمل",
+        remainingWork: "العمل المتبقي",
+        hours: "ساعات",
         
         // Settings
         settings: "الإعدادات",
@@ -253,9 +298,18 @@ const translations = {
         selectProject: "Selecione um projeto...",
         selectAssignee: "Selecione um responsável...",
         selectResponsible: "Selecione um responsável...",
+        selectPriority: "Selecione uma prioridade...",
+        selectCategory: "Selecione uma categoria...",
         errorNoProject: "Por favor, selecione um projeto",
         errorNoTask: "O assunto da tarefa é obrigatório",
-        includeMessageBody: "Incluir corpo da mensagem como descrição",
+        copyEmail: "Copiar e-mail",
+        
+        // New fields
+        priority: "Prioridade",
+        category: "Categoria",
+        work: "Trabalho",
+        remainingWork: "Trabalho restante",
+        hours: "horas",
         
         // Settings
         settings: "Configurações",
@@ -298,9 +352,18 @@ const translations = {
         selectProject: "একটি প্রকল্প নির্বাচন করুন...",
         selectAssignee: "ন্যস্তকারী নির্বাচন করুন...",
         selectResponsible: "দায়িত্বপ্রাপ্ত নির্বাচন করুন...",
+        selectPriority: "অগ্রাধিকার নির্বাচন করুন...",
+        selectCategory: "বিভাগ নির্বাচন করুন...",
         errorNoProject: "অনুগ্রহ করে একটি প্রকল্প নির্বাচন করুন",
         errorNoTask: "কাজের বিষয় প্রয়োজন",
-        includeMessageBody: "বিবরণ হিসাবে বার্তা বডি অন্তর্ভুক্ত করুন",
+        copyEmail: "ইমেইল কপি করুন",
+        
+        // New fields
+        priority: "অগ্রাধিকার",
+        category: "বিভাগ",
+        work: "কাজ",
+        remainingWork: "অবশিষ্ট কাজ",
+        hours: "ঘন্টা",
         
         // Settings
         settings: "সেটিংস",
@@ -343,9 +406,18 @@ const translations = {
         selectProject: "Выберите проект...",
         selectAssignee: "Выберите исполнителя...",
         selectResponsible: "Выберите ответственного...",
+        selectPriority: "Выберите приоритет...",
+        selectCategory: "Выберите категорию...",
         errorNoProject: "Пожалуйста, выберите проект",
         errorNoTask: "Тема задачи обязательна",
-        includeMessageBody: "Включить тело сообщения как описание",
+        copyEmail: "Копировать письмо",
+        
+        // New fields
+        priority: "Приоритет",
+        category: "Категория",
+        work: "Работа",
+        remainingWork: "Оставшаяся работа",
+        hours: "часов",
         
         // Settings
         settings: "Настройки",
@@ -388,9 +460,18 @@ const translations = {
         selectProject: "プロジェクトを選択...",
         selectAssignee: "担当者を選択...",
         selectResponsible: "責任者を選択...",
+        selectPriority: "優先度を選択...",
+        selectCategory: "カテゴリを選択...",
         errorNoProject: "プロジェクトを選択してください",
         errorNoTask: "タスクの件名は必須です",
-        includeMessageBody: "メッセージ本文を説明として含める",
+        copyEmail: "メールをコピー",
+        
+        // New fields
+        priority: "優先度",
+        category: "カテゴリ",
+        work: "作業",
+        remainingWork: "残作業",
+        hours: "時間",
         
         // Settings
         settings: "設定",
@@ -433,9 +514,18 @@ const translations = {
         selectProject: "Sélectionner un projet...",
         selectAssignee: "Sélectionner un assigné...",
         selectResponsible: "Sélectionner un responsable...",
+        selectPriority: "Sélectionner une priorité...",
+        selectCategory: "Sélectionner une catégorie...",
         errorNoProject: "Veuillez sélectionner un projet",
         errorNoTask: "Le sujet de la tâche est requis",
-        includeMessageBody: "Inclure le corps du message comme description",
+        copyEmail: "Copier l'email",
+        
+        // New fields
+        priority: "Priorité",
+        category: "Catégorie",
+        work: "Travail",
+        remainingWork: "Travail restant",
+        hours: "heures",
         
         // Settings
         settings: "Paramètres",
@@ -461,6 +551,330 @@ const translations = {
         // Days and months
         days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
         months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    },
+    
+    de: {
+        // Task panel
+        task: "Aufgabe",
+        project: "Projekt",
+        assignedTo: "Zugewiesen an",
+        responsible: "Verantwortlich",
+        description: "Beschreibung",
+        startDate: "Startdatum",
+        endDate: "Enddatum",
+        addTask: "Aufgabe hinzufügen",
+        taskCreated: "Aufgabe erfolgreich erstellt",
+        taskCreationFailed: "Fehler beim Erstellen der Aufgabe",
+        selectProject: "Projekt auswählen...",
+        selectAssignee: "Zugewiesenen auswählen...",
+        selectResponsible: "Verantwortlichen auswählen...",
+        selectPriority: "Priorität auswählen...",
+        selectCategory: "Kategorie auswählen...",
+        errorNoProject: "Bitte wählen Sie ein Projekt",
+        errorNoTask: "Aufgabenbetreff ist erforderlich",
+        copyEmail: "E-Mail kopieren",
+        
+        // New fields
+        priority: "Priorität",
+        category: "Kategorie",
+        work: "Arbeit",
+        remainingWork: "Verbleibende Arbeit",
+        hours: "Stunden",
+        
+        // Settings
+        settings: "Einstellungen",
+        apiUrl: "API-URL",
+        apiKey: "API-Schlüssel",
+        apiKeyHelp: "API-Schlüssel",
+        saveToken: "Token speichern",
+        defaultProject: "Standardprojekt",
+        defaultAssignee: "Standardzugewiesener",
+        defaultResponsible: "Standardverantwortlicher",
+        defaultTaskFormat: "Standardaufgabenformat",
+        language: "Sprache",
+        includeMessageBodyDefault: "Nachrichtentext standardmäßig als Beschreibung einfügen",
+        
+        // Format parameters help
+        formatHelp: "Sie können folgende Parameter verwenden, die durch Werte aus der Nachricht ersetzt werden:",
+        formatParams: "%author%, %subject%, %msgid%, %date-Y%, %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%",
+        
+        // Messages
+        connecting: "Verbinde...",
+        couldNotConnect: "Konnte keine Verbindung zu OpenProject herstellen",
+        
+        // Days and months
+        days: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"],
+        months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
+    },
+    
+    it: {
+        // Task panel
+        task: "Attività",
+        project: "Progetto",
+        assignedTo: "Assegnato a",
+        responsible: "Responsabile",
+        description: "Descrizione",
+        startDate: "Data inizio",
+        endDate: "Data fine",
+        addTask: "Aggiungi attività",
+        taskCreated: "Attività creata con successo",
+        taskCreationFailed: "Creazione attività fallita",
+        selectProject: "Seleziona progetto...",
+        selectAssignee: "Seleziona assegnatario...",
+        selectResponsible: "Seleziona responsabile...",
+        selectPriority: "Seleziona priorità...",
+        selectCategory: "Seleziona categoria...",
+        errorNoProject: "Selezionare un progetto",
+        errorNoTask: "L'oggetto dell'attività è obbligatorio",
+        copyEmail: "Copia email",
+        
+        // New fields
+        priority: "Priorità",
+        category: "Categoria",
+        work: "Lavoro",
+        remainingWork: "Lavoro rimanente",
+        hours: "ore",
+        
+        // Settings
+        settings: "Impostazioni",
+        apiUrl: "URL API",
+        apiKey: "Chiave API",
+        apiKeyHelp: "Chiave API",
+        saveToken: "Salva token",
+        defaultProject: "Progetto predefinito",
+        defaultAssignee: "Assegnatario predefinito",
+        defaultResponsible: "Responsabile predefinito",
+        defaultTaskFormat: "Formato attività predefinito",
+        language: "Lingua",
+        includeMessageBodyDefault: "Includi corpo del messaggio come descrizione per impostazione predefinita",
+        
+        // Format parameters help
+        formatHelp: "Puoi usare i seguenti parametri che verranno sostituiti dai valori del messaggio:",
+        formatParams: "%author%, %subject%, %msgid%, %date-Y%, %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%",
+        
+        // Messages
+        connecting: "Connessione...",
+        couldNotConnect: "Impossibile connettersi a OpenProject",
+        
+        // Days and months
+        days: ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"],
+        months: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
+    },
+    
+    ko: {
+        // Task panel
+        task: "작업",
+        project: "프로젝트",
+        assignedTo: "담당자",
+        responsible: "책임자",
+        description: "설명",
+        startDate: "시작일",
+        endDate: "종료일",
+        addTask: "작업 추가",
+        taskCreated: "작업이 성공적으로 생성되었습니다",
+        taskCreationFailed: "작업 생성 실패",
+        selectProject: "프로젝트 선택...",
+        selectAssignee: "담당자 선택...",
+        selectResponsible: "책임자 선택...",
+        selectPriority: "우선순위 선택...",
+        selectCategory: "카테고리 선택...",
+        errorNoProject: "프로젝트를 선택하세요",
+        errorNoTask: "작업 제목은 필수입니다",
+        copyEmail: "이메일 복사",
+        
+        // New fields
+        priority: "우선순위",
+        category: "카테고리",
+        work: "작업",
+        remainingWork: "남은 작업",
+        hours: "시간",
+        
+        // Settings
+        settings: "설정",
+        apiUrl: "API URL",
+        apiKey: "API 키",
+        apiKeyHelp: "API 키",
+        saveToken: "토큰 저장",
+        defaultProject: "기본 프로젝트",
+        defaultAssignee: "기본 담당자",
+        defaultResponsible: "기본 책임자",
+        defaultTaskFormat: "기본 작업 형식",
+        language: "언어",
+        includeMessageBodyDefault: "기본적으로 메시지 본문을 설명으로 포함",
+        
+        // Format parameters help
+        formatHelp: "메시지 값으로 대체되는 다음 매개변수를 사용할 수 있습니다:",
+        formatParams: "%author%, %subject%, %msgid%, %date-Y%, %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%",
+        
+        // Messages
+        connecting: "연결 중...",
+        couldNotConnect: "OpenProject에 연결할 수 없습니다",
+        
+        // Days and months
+        days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+        months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+    },
+    
+    nl: {
+        // Task panel
+        task: "Taak",
+        project: "Project",
+        assignedTo: "Toegewezen aan",
+        responsible: "Verantwoordelijke",
+        description: "Beschrijving",
+        startDate: "Startdatum",
+        endDate: "Einddatum",
+        addTask: "Taak toevoegen",
+        taskCreated: "Taak succesvol aangemaakt",
+        taskCreationFailed: "Taak aanmaken mislukt",
+        selectProject: "Selecteer project...",
+        selectAssignee: "Selecteer toegewezen...",
+        selectResponsible: "Selecteer verantwoordelijke...",
+        selectPriority: "Selecteer prioriteit...",
+        selectCategory: "Selecteer categorie...",
+        errorNoProject: "Selecteer een project",
+        errorNoTask: "Taakonderwerp is vereist",
+        copyEmail: "E-mail kopiëren",
+        
+        // New fields
+        priority: "Prioriteit",
+        category: "Categorie",
+        work: "Werk",
+        remainingWork: "Resterend werk",
+        hours: "uren",
+        
+        // Settings
+        settings: "Instellingen",
+        apiUrl: "API URL",
+        apiKey: "API-sleutel",
+        apiKeyHelp: "API-sleutel",
+        saveToken: "Token opslaan",
+        defaultProject: "Standaardproject",
+        defaultAssignee: "Standaard toegewezen",
+        defaultResponsible: "Standaard verantwoordelijke",
+        defaultTaskFormat: "Standaard taakformaat",
+        language: "Taal",
+        includeMessageBodyDefault: "Berichttekst standaard als beschrijving toevoegen",
+        
+        // Format parameters help
+        formatHelp: "U kunt de volgende parameters gebruiken die worden vervangen door de waarde uit het bericht:",
+        formatParams: "%author%, %subject%, %msgid%, %date-Y%, %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%",
+        
+        // Messages
+        connecting: "Verbinden...",
+        couldNotConnect: "Kon geen verbinding maken met OpenProject",
+        
+        // Days and months
+        days: ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"],
+        months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"]
+    },
+    
+    pl: {
+        // Task panel
+        task: "Zadanie",
+        project: "Projekt",
+        assignedTo: "Przypisane do",
+        responsible: "Odpowiedzialny",
+        description: "Opis",
+        startDate: "Data rozpoczęcia",
+        endDate: "Data zakończenia",
+        addTask: "Dodaj zadanie",
+        taskCreated: "Zadanie utworzone pomyślnie",
+        taskCreationFailed: "Błąd tworzenia zadania",
+        selectProject: "Wybierz projekt...",
+        selectAssignee: "Wybierz przypisanego...",
+        selectResponsible: "Wybierz odpowiedzialnego...",
+        selectPriority: "Wybierz priorytet...",
+        selectCategory: "Wybierz kategorię...",
+        errorNoProject: "Wybierz projekt",
+        errorNoTask: "Temat zadania jest wymagany",
+        copyEmail: "Kopiuj e-mail",
+        
+        // New fields
+        priority: "Priorytet",
+        category: "Kategoria",
+        work: "Praca",
+        remainingWork: "Pozostała praca",
+        hours: "godzin",
+        
+        // Settings
+        settings: "Ustawienia",
+        apiUrl: "URL API",
+        apiKey: "Klucz API",
+        apiKeyHelp: "Klucz API",
+        saveToken: "Zapisz token",
+        defaultProject: "Domyślny projekt",
+        defaultAssignee: "Domyślnie przypisany",
+        defaultResponsible: "Domyślnie odpowiedzialny",
+        defaultTaskFormat: "Domyślny format zadania",
+        language: "Język",
+        includeMessageBodyDefault: "Domyślnie dołącz treść wiadomości jako opis",
+        
+        // Format parameters help
+        formatHelp: "Możesz użyć następujących parametrów, które zostaną zastąpione wartościami z wiadomości:",
+        formatParams: "%author%, %subject%, %msgid%, %date-Y%, %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%",
+        
+        // Messages
+        connecting: "Łączenie...",
+        couldNotConnect: "Nie można połączyć się z OpenProject",
+        
+        // Days and months
+        days: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+        months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"]
+    },
+    
+    sv: {
+        // Task panel
+        task: "Uppgift",
+        project: "Projekt",
+        assignedTo: "Tilldelad till",
+        responsible: "Ansvarig",
+        description: "Beskrivning",
+        startDate: "Startdatum",
+        endDate: "Slutdatum",
+        addTask: "Lägg till uppgift",
+        taskCreated: "Uppgift skapad",
+        taskCreationFailed: "Kunde inte skapa uppgift",
+        selectProject: "Välj projekt...",
+        selectAssignee: "Välj tilldelad...",
+        selectResponsible: "Välj ansvarig...",
+        selectPriority: "Välj prioritet...",
+        selectCategory: "Välj kategori...",
+        errorNoProject: "Välj ett projekt",
+        errorNoTask: "Uppgiftens ämne krävs",
+        copyEmail: "Kopiera e-post",
+        
+        // New fields
+        priority: "Prioritet",
+        category: "Kategori",
+        work: "Arbete",
+        remainingWork: "Återstående arbete",
+        hours: "timmar",
+        
+        // Settings
+        settings: "Inställningar",
+        apiUrl: "API-URL",
+        apiKey: "API-nyckel",
+        apiKeyHelp: "API-nyckel",
+        saveToken: "Spara token",
+        defaultProject: "Standardprojekt",
+        defaultAssignee: "Standard tilldelad",
+        defaultResponsible: "Standard ansvarig",
+        defaultTaskFormat: "Standardformat för uppgift",
+        language: "Språk",
+        includeMessageBodyDefault: "Inkludera meddelandetext som beskrivning som standard",
+        
+        // Format parameters help
+        formatHelp: "Du kan använda följande parametrar som ersätts med värden från meddelandet:",
+        formatParams: "%author%, %subject%, %msgid%, %date-Y%, %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%",
+        
+        // Messages
+        connecting: "Ansluter...",
+        couldNotConnect: "Kunde inte ansluta till OpenProject",
+        
+        // Days and months
+        days: ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"],
+        months: ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
     }
 };
 
